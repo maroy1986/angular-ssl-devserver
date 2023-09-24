@@ -70,7 +70,11 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-ssl-devserver:build"
+            "browserTarget": "angular-ssl-devserver:build",
+            "sslKey": "./certs/privkey.pem",
+            "sslCert": "./certs/cert.pem",
+            "ssl": true,
+            "host": "localdev.marcandreroy.ca"
           },
           "configurations": {
             "production": {

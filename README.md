@@ -1,27 +1,37 @@
 # AngularSslDevserver
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+This repository shows you an example of how to run your local angular dev server with SSL enabled.
 
-## Development server
+A few steps needs to be done before it works.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1 - You need to add a local entry in your host file for the domain you want to use. For that purpose, you need to edit your host file and point the FQDN you want to use to `127.0.0.1`
+> While you could generate a certificate for `localhost` locally and add it to the trust certificates, I feel like having a valid FQDN is closer to the reality of a prod deployed application.
 
-## Code scaffolding
+2 - Get a certificate for the given FQDN you choosed to use as your local dev URL. A few providers allows you to create certificates for non-public URL. I personnaly like to use [ZeroSSL](https://zerossl.com/) which can generate 90 days certicates for non-public domain by validating them by email. If you own a domain, you could create a sub-domain pointing to `127.0.0.1` and get a certificate for it via `Acme`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3 - Once you have your certicate, simply drop it into the `certs` folder. Please note that this folder must be included in the `.gitignore` so your certificates doesn't end up in your repository for obvious security reasons.
 
-## Build
+4. You need to add a few lines into the `angular.json` file to tell it to enable SSL and use your certicate. Underneat the `serve:` section, add the following :
+```
+"options": {
+            ... (any previously precent option)
+            "sslKey": "./certs/privkey.pem",
+            "sslCert": "./certs/cert.pem",
+            "ssl": true,
+            "host": "<your domain>"
+          },
+```
+5. Now that these configs are in place, you're ready! Fire it up with the classic `npm run start` and see the magic happening. You'll have access to your local angular app through the host you specified on the previous steps, through SSL.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## The warning
 
-## Running unit tests
+Angular will show you the following warning :
+>Warning: This is a simple server for use in testing or debugging Angular applications
+locally. It hasn't been reviewed for security issues.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+>Binding this server to an open connection can result in compromising your application or
+computer. Using a different host than the one passed to the "--host" flag might result in
+websocket connection issues. You might need to use "--disable-host-check" if that's the
+case.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+This is fine in developement. That being said, **you should never run your angular app in production or any other environment then local development using the `npm run start` command**.
