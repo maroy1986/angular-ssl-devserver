@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "test-edge": "ng test --browsers Edge",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -29,6 +30,7 @@
     "@angular/cli": "^16.2.3",
     "@angular/compiler-cli": "^16.2.6",
     "@angular/language-service": "^16.2.6",
+    "@chiragrupani/karma-chromium-edge-launcher": "^2.3.1",
     "@types/jasmine": "~4.3.6",
     "@types/jasminewd2": "~2.0.11",
     "@types/node": "^20.6.3",
