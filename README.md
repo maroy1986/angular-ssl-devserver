@@ -1,4 +1,5 @@
 # AngularSslDevserver
+[![CI](https://github.com/maroy1986/angular-ssl-devserver/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/maroy1986/angular-ssl-devserver/actions/workflows/main.yml)
 
 This repository shows you an example of how to run your local angular dev server with SSL enabled.
 
