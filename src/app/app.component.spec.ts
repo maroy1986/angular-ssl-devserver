@@ -1,10 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { Router } from '@angular/router';
 
 describe('AppComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [AppComponent],
+            declarations: [AppComponent ]
         }).compileComponents();
     });
 
@@ -14,16 +15,16 @@ describe('AppComponent', () => {
         expect(app).toBeTruthy();
     });
 
-    it('should have the \'angular17\' title', () => {
+    it('should have the \'Angular dev with local SSL \' title', () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.componentInstance;
-        expect(app.title).toEqual('angular17');
+        expect(app.title).toEqual('Angular dev with local SSL');
     });
 
     it('should render title', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular17');
+        expect(compiled.querySelector('h1')?.textContent).toContain('Angular dev with local SSL');
     });
 });
